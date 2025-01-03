@@ -1,0 +1,48 @@
+CREATE DATABASE IF NOT EXISTS football;
+
+USE football;
+
+CREATE TABLE IF NOT EXISTS teams (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  points INT DEFAULT 0,
+  games INT DEFAULT 0,
+  wins INT DEFAULT 0,
+  draws INT DEFAULT 0,
+  losses INT DEFAULT 0,
+  redCards INT DEFAULT 0,
+  yellowCards INT DEFAULT 0,
+  goalsFor INT DEFAULT 0,
+  goalsAgainst INT DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS players (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  number INT NOT NULL,
+  team_id INT,
+  FOREIGN KEY (team_id) REFERENCES teams(id)
+);
+
+CREATE TABLE IF NOT EXISTS matches (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  team1_id INT,
+  team2_id INT,
+  date DATETIME,
+  score1 INT,
+  score2 INT,
+  FOREIGN KEY (team1_id) REFERENCES teams(id),
+  FOREIGN KEY (team2_id) REFERENCES teams(id)
+);
+
+CREATE TABLE IF NOT EXISTS waiting_list (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS attendance (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date DATE NOT NULL,
+  player_id INT,
+  FOREIGN KEY (player_id) REFERENCES players(id)
+);

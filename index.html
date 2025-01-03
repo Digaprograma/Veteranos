@@ -1,0 +1,1994 @@
+<html><head><base href="."><title>VETERANOS GR&#xc2;MIO MINEIRO</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+    * {box-sizing: border-box;}
+    body {
+      font-family: Arial, sans-serif; 
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(0deg, 
+        rgba(34,139,34,0.3) 0%,
+        rgba(34,139,34,0.1) 100%
+      );
+    }
+    </style>
+    <html lang="pt-br">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>VETERANOS GRÊMIO MINEIRO</title>
+      <style>    const express = require('express');
+    const mysql = require('mysql');
+    const app = express();
+    const port = 3000;
+    
+    // Configurar a conexão com o banco de dados MySQL
+    const db = mysql.createConnection({
+      host: 'localhost',
+      user: 'seu_usuario',
+      password: 'sua_senha',
+      database: 'football'
+    });
+    
+    db.connect((err) => {
+      if (err) {
+        console.error('Erro ao conectar ao MySQL:', err);
+        return;
+      }
+      console.log('Conectado ao MySQL');
+    });
+    
+    // Middleware para servir arquivos estáticos (como index.html)
+    app.use(express.static('public'));
+    
+    // Rota para obter todos os times
+    app.get('/teams', (req, res) => {
+      db.query('SELECT * FROM teams', (err, results) => {
+        if (err) {
+          res.status(500).send(err.message);
+        } else {
+          res.json(results);
+        }
+      });
+    });
+    
+    // Iniciar o servidor
+    app.listen(port, () => {
+      console.log(`Servidor rodando em http://localhost:${port}`);
+    });
+        /* Adicione seu estilo aqui */
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+      </style>
+    </head>
+    <body>
+      <h2>Times</h2>
+      <table id="teams-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Pontos</th>
+            <th>Jogos</th>
+            <th>Vitórias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
+            <th>Cartões Vermelhos</th>
+            <th>Cartões Amarelos</th>
+            <th>Gols Pró</th>
+            <th>Gols Contra</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Linhas da tabela serão inseridas aqui dinamicamente -->
+        </tbody>
+      </table>
+    
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          fetch('/teams')
+            .then(response => response.json())
+            .then(data => {
+              const tableBody = document.querySelector('#teams-table tbody');
+              tableBody.innerHTML = ''; // Limpa o conteúdo existente
+              data.forEach(team => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                  <td>${team.id}</td>
+                  <td>${team.name}</td>
+                  <td>${team.points}</td>
+                  <td>${team.games}</td>
+                  <td>${team.wins}</td>
+                  <td>${team.draws}</td>
+                  <td>${team.losses}</td>
+                  <td>${team.redCards}</td>
+                  <td>${team.yellowCards}</td>
+                  <td>${team.goalsFor}</td>
+                  <td>${team.goalsAgainst}</td>
+                `;
+                tableBody.appendChild(row);
+              });
+            })
+            .catch(error => console.error('Erro ao buscar dados:', error));
+        });
+      </script>
+    </body>
+    </html>
+      background-image: 
+        linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px),
+        url('https://png.pngtree.com/background/20211217/original/pngtree-minimalistic-hand-drawn-soccer-field-advertising-background-picture-image_1140788.jpg');
+      background-size: 50px 50px, 50px 50px, cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+    
+    .tab {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .tab.active {
+      display: block;
+    }
+    
+    .tab-buttons {
+      margin-bottom: 20px;
+      background: linear-gradient(180deg,
+        #1b5e20 0%,
+        #2e7d32 100%
+      );
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .tab-buttons button {
+      padding: 12px 24px;
+      cursor: pointer;
+      background: linear-gradient(180deg,
+        #43a047 0%,
+        #388e3c 100%
+      );
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    
+    .tab-buttons button:hover {
+      background: linear-gradient(180deg,
+        #66bb6a 0%,
+        #43a047 100%
+      );
+      transform: translateY(-1px);
+    }
+    
+    .table {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .table th {
+      padding: 12px 8px;
+      background: linear-gradient(180deg, #1b5e20 0%, #2e7d32 100%);
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .table td {
+      padding: 15px 12px; 
+      text-align: center;
+      min-width: 45px;
+    }
+    
+    .table tr:nth-child(even) {
+      background-color: rgba(255,255,255,0.98);
+    }
+    
+    .table tr:nth-child(odd) {
+      background-color: rgba(245,245,245,0.98);
+    }
+    
+    h2 {
+      color: #1b5e20;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #4CAF50;
+    }
+    
+    .admin-login {max-width: 300px; margin: 20px auto;}
+    .admin-form input {width: 100%; padding: 10px; margin: 5px 0;}
+    .btn {
+      padding: 10px 20px; 
+      background: linear-gradient(180deg,
+        #43a047 0%,
+        #388e3c 100%
+      ) !important;
+      color: white; 
+      border: none; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      margin: 5px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(180deg,
+        #66bb6a 0%,
+        #43a047 100%
+      ) !important;
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+    .btn.logout {background-color: #f44336;}
+    .btn.logout:hover {background-color: #da190b;}
+    .statute-content {background: white; padding: 20px; border-radius: 4px;}
+    .waiting-list-table {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .waiting-list-controls {
+      margin: 20px 0;
+    }
+    .waiting-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: white;
+      margin: 8px 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .attendance-controls, .poll-controls {
+      margin: 20px 0;
+    }
+    .attendance-date {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .attendance-item {
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+    .poll-voting {
+      max-width: 400px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .poll-voting input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    .poll-results, .poll-closed {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    .form-select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+    }
+    .poll-voting select {
+      margin-bottom: 10px;
+    }
+    .admin-menu {
+      background: linear-gradient(180deg,
+        #1b5e20 0%,
+        #2e7d32 100%
+      );
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .admin-menu button {
+      padding: 12px 24px;
+      background: linear-gradient(180deg,
+        #43a047 0%,
+        #388e3c 100%
+      );
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .admin-menu button:hover {
+      background: linear-gradient(180deg,
+        #66bb6a 0%,
+        #43a047 100%
+      );
+      transform: translateY(-1px);
+    }
+    .admin-menu button:active {
+      transform: translateY(1px);
+    }
+    .admin-section {
+      display: none;
+      background: white;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .admin-section.active {
+      display: block;
+    }
+    .matches-table h3 {
+      margin: 20px 0 10px 0;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 4px;
+    }
+    .matches-table table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .matches-table h2 {
+      margin-top: 30px;
+    }
+    .matches-table tr {
+      border: 1px solid #ddd;
+    }
+    .matches-table td, .matches-table th {
+      padding: 12px;
+      text-align: center;
+    }
+    .admin-matches {
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    
+    .admin-matches table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    
+    .admin-matches th,
+    .admin-matches td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    
+    .admin-match-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 5px 0;
+    }
+    .admin-matches table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    .admin-matches th,
+    .admin-matches td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .admin-matches th {
+      background: #4CAF50;
+      color: white;
+    }
+    .admin-matches input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .admin-matches .btn {
+      margin: 0 5px;
+    }
+    
+    .question-voting {
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      margin: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .question-options {
+      margin: 10px 0;
+    }
+    
+    .question-option {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+    
+    .question-results {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .poll-result-item {
+      padding: 12px;
+      margin: 8px 0;
+      background: #f9f9f9;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .poll-result-item:nth-child(1) {
+      background: linear-gradient(45deg, #ffd700, #fff8e7);
+      font-weight: bold;
+    }
+    
+    .poll-result-item:nth-child(2) {
+      background: linear-gradient(45deg, #c0c0c0, #f9f9f9);
+    }
+    
+    .poll-result-item:nth-child(3) {
+      background: linear-gradient(45deg, #cd7f32, #fae6d9);
+    }
+    .btn.reset {
+      background: linear-gradient(180deg,
+        #f44336 0%,
+        #d32f2f 100%
+      ) !important;
+    }
+    
+    .btn.reset:hover {
+      background: linear-gradient(180deg,
+        #ef5350 0%,
+        #e53935 100%
+      ) !important;
+    }
+    .btn.yellow-card {
+      background: linear-gradient(180deg, #ffd700 0%, #daa520 100%) !important;
+      color: black;
+    }
+    
+    .btn.red-card {
+      background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%) !important;
+    }
+    
+    .btn.goal {
+      background: linear-gradient(180deg, #4CAF50 0%, #388E3C 100%) !important;
+    }
+    .statistics-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    
+    .statistics-table th,
+    .statistics-table td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    
+    .statistics-table th {
+      background: #4CAF50;
+      color: white;
+    }
+    #admin-waiting-name {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    </style>
+    <script>let isAdmin = false;
+    let teams = [{
+      name: 'Itália',
+      players: [],
+      points: 0,
+      games: 0,
+      wins: 0,
+      draws: 0,
+      losses: 0,
+      redCards: 0,
+      yellowCards: 0,
+      goalsFor: 0,
+      goalsAgainst: 0
+    }, {
+      name: 'Portugal',
+      players: [],
+      points: 0,
+      games: 0,
+      wins: 0,
+      draws: 0,
+      losses: 0,
+      redCards: 0,
+      yellowCards: 0,
+      goalsFor: 0,
+      goalsAgainst: 0
+    }, {
+      name: 'Holanda',
+      players: [],
+      points: 0,
+      games: 0,
+      wins: 0,
+      draws: 0,
+      losses: 0,
+      redCards: 0,
+      yellowCards: 0,
+      goalsFor: 0,
+      goalsAgainst: 0
+    }, {
+      name: 'Espanha',
+      players: [],
+      points: 0,
+      games: 0,
+      wins: 0,
+      draws: 0,
+      losses: 0,
+      redCards: 0,
+      yellowCards: 0,
+      goalsFor: 0,
+      goalsAgainst: 0
+    }];
+    let waitingList = [];
+    let attendanceList = {};
+    let pollActive = false;
+    let pollVotes = {};
+    let votedCodes = new Set();
+    let playerCodes = {};
+    let activeQuestion = null;
+    let questionVotes = {};
+    let votedPlayers = new Set();
+    let playerStats = {};
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (tabId === 'waiting-list') {
+        updateWaitingListView();
+      }
+      if (tabId === 'licenses') {
+        updateAttendanceView();
+      }
+      if (tabId === 'poll') {
+        updatePollView();
+      }
+      if (tabId === 'statistics') {
+        updateStatisticsView();
+      }
+      if (tabId === 'admin-panel') {
+        updateAdminPanelView();
+      }
+      if (tabId === 'teams') {
+        updateTeamsView();
+      }
+      if (tabId === 'statute') {
+        document.getElementById('statute-content').value = localStorage.getItem('statute') || '';
+      }
+    }
+    function adminLogin() {
+      const password = document.getElementById('adminPassword').value;
+      if (password === 'Gremio@') {
+        isAdmin = true;
+        alert('Login successful!');
+        showTab('admin-panel');
+        showAdminSection('waiting');
+      } else {
+        alert('Incorrect password!');
+      }
+    }
+    function adminLogout() {
+      isAdmin = false;
+      showTab('classification');
+      updateMatches();
+      updateWaitingListView();
+      document.getElementById('adminPassword').value = '';
+    }
+    function generateMatches() {
+      const round1 = [{
+        team1: 'HOLANDA',
+        team2: 'ITÁLIA',
+        date: new Date('2024-12-15T08:10:00.000Z'),
+        round: 1,
+        turn: 1
+      }, {
+        team1: 'PORTUGAL',
+        team2: 'ESPANHA',
+        date: new Date('2024-12-15T09:10:00.000Z'),
+        round: 1,
+        turn: 1
+      }, {
+        team1: 'ESPANHA',
+        team2: 'HOLANDA',
+        date: new Date('2024-12-22T08:10:00.000Z'),
+        round: 2,
+        turn: 1
+      }, {
+        team1: 'ITÁLIA',
+        team2: 'PORTUGAL',
+        date: new Date('2024-12-22T09:10:00.000Z'),
+        round: 2,
+        turn: 1
+      }, {
+        team1: 'ITÁLIA',
+        team2: 'ESPANHA',
+        date: new Date('2024-12-29T08:10:00.000Z'),
+        round: 3,
+        turn: 1
+      }, {
+        team1: 'PORTUGAL',
+        team2: 'HOLANDA',
+        date: new Date('2024-12-29T09:10:00.000Z'),
+        round: 3,
+        turn: 1
+      }];
+      const round2 = [{
+        team1: 'ESPANHA',
+        team2: 'PORTUGAL',
+        date: new Date('2024-12-15T08:10:00.000Z'),
+        round: 1,
+        turn: 2
+      }, {
+        team1: 'ITÁLIA',
+        team2: 'HOLANDA',
+        date: new Date('2024-12-15T09:10:00.000Z'),
+        round: 1,
+        turn: 2
+      }, {
+        team1: 'HOLANDA',
+        team2: 'ESPANHA',
+        date: new Date('2024-12-22T08:10:00.000Z'),
+        round: 2,
+        turn: 2
+      }, {
+        team1: 'PORTUGAL',
+        team2: 'ITÁLIA',
+        date: new Date('2024-12-22T09:10:00.000Z'),
+        round: 2,
+        turn: 2
+      }, {
+        team1: 'ESPANHA',
+        team2: 'ITÁLIA',
+        date: new Date('2024-12-29T08:10:00.000Z'),
+        round: 3,
+        turn: 2
+      }, {
+        team1: 'HOLANDA',
+        team2: 'PORTUGAL',
+        date: new Date('2024-12-29T09:10:00.000Z'),
+        round: 3,
+        turn: 2
+      }];
+      return [...round1, ...round2].map(match => ({
+        ...match,
+        score1: null,
+        score2: null
+      }));
+    }
+    let matches = generateMatches();
+    function updateMatchScore(matchIndex) {
+      const match = matches[matchIndex];
+      const team1Record = teams.find(t => t.name === match.team1);
+      const team2Record = teams.find(t => t.name === match.team2);
+      if (team1Record && team2Record) {
+        if (team1Record.games > 0) {
+          team1Record.games--;
+          team2Record.games--;
+          team1Record.goalsFor -= match.score1 || 0;
+          team1Record.goalsAgainst -= match.score2 || 0;
+          team2Record.goalsFor -= match.score2 || 0;
+          team2Record.goalsAgainst -= match.score1 || 0;
+        }
+        team1Record.goalsFor += match.score1;
+        team1Record.goalsAgainst += match.score2;
+        team2Record.goalsFor += match.score2;
+        team2Record.goalsAgainst += match.score1;
+        team1Record.games++;
+        team2Record.games++;
+        if (match.score1 > match.score2) {
+          team1Record.wins++;
+          team2Record.losses++;
+          team1Record.points += 2;
+        } else if (match.score2 > match.score1) {
+          team2Record.wins++;
+          team1Record.losses++;
+          team2Record.points += 2;
+        } else {
+          team1Record.draws++;
+          team2Record.draws++;
+          team1Record.points += 1;
+          team2Record.points += 1;
+        }
+      }
+      updateClassification();
+    }
+    function editMatch(matchIndex) {
+      const row = document.querySelector(`#admin-match-${matchIndex}`);
+      const match = matches[matchIndex];
+      const dateStr = match.date ? match.date.toISOString().slice(0, 16) : '';
+      row.innerHTML = `
+        <td>${match.team1} vs ${match.team2}</td>
+        <td>
+          <input type="datetime-local" class="match-date" value="${dateStr}" style="width: 200px">
+        </td>
+        <td>
+          <input type="time" class="match-time" value="${match.date ? match.date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) : ''}" style="width: 100px">
+        </td>
+        <td>
+          <input type="number" min="0" class="score1" value="${match.score1 || 0}" style="width: 50px">
+          -
+          <input type="number" min="0" class="score2" value="${match.score2 || 0}" style="width: 50px">
+        </td>
+        <td>
+          <button onclick="saveMatchEdit(${matchIndex})" class="btn">Salvar</button>
+          <button onclick="updateAdminPanelView()" class="btn">Cancelar</button>
+        </td>
+      `;
+    }
+    function saveMatchEdit(matchIndex) {
+      const row = document.querySelector(`#admin-match-${matchIndex}`);
+      const dateInput = row.querySelector('.match-date');
+      const timeInput = row.querySelector('.match-time');
+      const score1Input = row.querySelector('.score1');
+      const score2Input = row.querySelector('.score2');
+      const dateTimeStr = dateInput.value.split('T')[0] + 'T' + timeInput.value;
+      matches[matchIndex].date = new Date(dateTimeStr);
+      matches[matchIndex].score1 = parseInt(score1Input.value) || 0;
+      matches[matchIndex].score2 = parseInt(score2Input.value) || 0;
+      updateMatchScore(matchIndex);
+      updateAdminPanelView();
+      updateMatches();
+    }
+    function updateClassification() {
+      const classTable = document.getElementById('classification-table');
+      classTable.innerHTML = `
+        <tr>
+          <th>Time</th>
+          <th>PTS</th>
+          <th>J</th>
+          <th>V</th>
+          <th>E</th> 
+          <th>D</th>
+          <th>CV</th>
+          <th>CA</th>
+          <th>GP</th>
+          <th>GC</th>
+          <th>SG</th>
+        </tr>
+      `;
+      teams.sort((a, b) => b.points - a.points).forEach(team => {
+        const goalDiff = team.goalsFor - team.goalsAgainst;
+        const row = classTable.insertRow();
+        row.insertCell(0).textContent = team.name;
+        row.insertCell(1).textContent = team.points;
+        row.insertCell(2).textContent = team.games;
+        row.insertCell(3).textContent = team.wins;
+        row.insertCell(4).textContent = team.draws;
+        row.insertCell(5).textContent = team.losses;
+        row.insertCell(6).textContent = team.redCards;
+        row.insertCell(7).textContent = team.yellowCards;
+        row.insertCell(8).textContent = team.goalsFor;
+        row.insertCell(9).textContent = team.goalsAgainst;
+        row.insertCell(10).textContent = goalDiff;
+      });
+    }
+    function clearMatches() {
+      teams.forEach(team => {
+        team.points = 0;
+        team.games = 0;
+        team.wins = 0;
+        team.draws = 0;
+        team.losses = 0;
+        team.goalsFor = 0;
+        team.goalsAgainst = 0;
+      });
+      matches = generateMatches();
+      updateMatches();
+      updateClassification();
+    }
+    function restartTournament() {
+      if (confirm('Tem certeza que deseja reiniciar o campeonato? Todos os dados serão perdidos.')) {
+        clearMatches();
+      }
+    }
+    function addToWaitingList() {
+      if (!isAdmin) return;
+      const name = document.getElementById('waiting-list-input').value.trim();
+      if (name) {
+        waitingList.push(name);
+        document.getElementById('waiting-list-input').value = '';
+        updateWaitingListView();
+      }
+    }
+    function removeFromWaitingList(index) {
+      if (!isAdmin) return;
+      waitingList.splice(index, 1);
+      updateWaitingListView();
+    }
+    function updateWaitingListView() {
+      const content = document.getElementById('waiting-list-content');
+      content.innerHTML = `
+          <div class="waiting-list-table">
+            ${waitingList.map(name => `
+              <div class="waiting-list-item">
+                <span>${name}</span>
+              </div>
+            `).join('')}
+          </div>
+      `;
+    }
+    function generatePlayerCode(playerName) {
+      return Math.random().toString(36).substr(2, 6).toUpperCase();
+    }
+    function updateAttendanceView() {
+      const content = document.getElementById('licenses-content');
+      content.innerHTML = `
+        <div class="attendance-list">
+          ${Object.entries(attendanceList).map(([date, players]) => `
+            <div class="attendance-date">
+              <h4>${new Date(date).toLocaleDateString()}</h4>
+              <ul>
+                ${players.map(player => `<li>${player}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    function addAttendance() {
+      if (!isAdmin) return;
+      const date = document.getElementById('attendance-date').value;
+      const name = document.getElementById('attendance-name').value.trim();
+      if (!date || !name) return;
+      if (!attendanceList[date]) {
+        attendanceList[date] = [];
+      }
+      if (!attendanceList[date].includes(name)) {
+        attendanceList[date].push(name);
+        document.getElementById('attendance-name').value = '';
+        updateAttendanceView();
+      }
+    }
+    function removeAttendance(date, player) {
+      if (!isAdmin) return;
+      attendanceList[date] = attendanceList[date].filter(p => p !== player);
+      if (attendanceList[date].length === 0) {
+        delete attendanceList[date];
+      }
+      updateAttendanceView();
+    }
+    function updatePollView() {
+      const content = document.getElementById('poll-content');
+      const playerCodesHtml = teams.map(team => `
+        <div style="margin: 15px 0; background: white; padding: 15px; border-radius: 4px;">
+          <h5 style="color: #1b5e20; margin-bottom: 10px;">${team.name}</h5>
+          <ul style="list-style: none; padding: 0;">
+            ${team.players.map(player => `<li style="padding: 5px 0;">${player.number} - ${player.name} (Código: ${player.votingCode})</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+      content.innerHTML = `
+        ${activeQuestion ? `
+          <div class="question-voting">
+            <h3>${activeQuestion.text}</h3>
+            
+            <input type="text" id="player-vote-code" placeholder="Seu código de jogador">
+            
+            <div class="question-options">
+              ${activeQuestion.options.map(option => `
+                <div class="question-option">
+                  <input type="radio" name="vote" value="${option}" id="opt-${option}">
+                  <label for="opt-${option}">${option}</label>
+                </div>
+              `).join('')}
+            </div>
+    
+            <button onclick="submitQuestionVote()" class="btn">Votar</button>
+    
+            <div class="question-results">
+              <h4>Resultados Parciais</h4>
+              ${activeQuestion.options.map(option => {
+        const votes = questionVotes[option] || 0;
+        const total = Object.values(questionVotes).reduce((a, b) => a + b, 0);
+        const percent = total ? Math.round(votes / total * 100) : 0;
+        return `
+                  <div class="poll-result-item">
+                    <span>${option}: ${votes} votos (${percent}%)</span>
+                  </div>
+                `;
+      }).join('')}
+            </div>
+          </div>
+        ` : ''}
+    
+        <div class="poll-voting">
+          <h4>Registrar Voto - Jogador Destaque</h4>
+          <input type="text" id="player-code" placeholder="Código de votação">
+          <select id="vote-team" onchange="updatePlayerSelection()" class="form-select">
+            <option value="">Selecione o Time</option>
+            ${teams.map(team => `<option value="${team.name}">${team.name}</option>`).join('')}
+          </select>
+          <select id="vote-player" class="form-select">
+            <option value="">Selecione o Jogador</option>
+          </select>
+          <button onclick="submitVote()" class="btn">Votar</button>
+        </div>
+    
+        <div class="player-codes" style="margin-top: 20px;">
+          <h4>Códigos de Votação</h4>
+          ${playerCodesHtml}
+        </div>
+    
+        ${!pollActive && Object.keys(pollVotes).length > 0 ? `
+          <div class="poll-results">
+            <h4>Resultado - Top 5 Jogadores Mais Votados</h4>
+            ${(() => {
+        const results = getWinningPlayer();
+        return results.topPlayers.map((player, i) => `
+                <div class="poll-result-item">
+                  <span>${i + 1}º lugar: ${player} (${results.votes[i]} votos)</span>
+                </div>
+              `).join('');
+      })()}
+          </div>
+        ` : ''}
+      `;
+    }
+    function updatePlayerSelection() {
+      const teamSelect = document.getElementById('vote-team');
+      const playerSelect = document.getElementById('vote-player');
+      const selectedTeam = teams.find(team => team.name === teamSelect.value);
+      playerSelect.innerHTML = '<option value="">Selecione o Jogador</option>';
+      if (selectedTeam && selectedTeam.players) {
+        selectedTeam.players.forEach(player => {
+          playerSelect.innerHTML += `<option value="${player.name}">${player.number} - ${player.name}</option>`;
+        });
+      }
+    }
+    function submitVote() {
+      const code = document.getElementById('player-code').value.trim().toUpperCase();
+      const teamSelect = document.getElementById('vote-team');
+      const playerSelect = document.getElementById('vote-player');
+      if (!code || !teamSelect.value || !playerSelect.value || !pollActive) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+      const matchingPlayer = teams.some(team => team.players.some(player => player.votingCode === code));
+      if (!matchingPlayer) {
+        alert('Código de votação inválido');
+        return;
+      }
+      if (votedCodes.has(code)) {
+        alert('Este código já foi utilizado para votar.');
+        return;
+      }
+      pollVotes[code] = {
+        team: teamSelect.value,
+        player: playerSelect.value
+      };
+      votedCodes.add(code);
+      alert('Voto registrado com sucesso!');
+      document.getElementById('player-code').value = '';
+      teamSelect.value = '';
+      playerSelect.innerHTML = '<option value="">Selecione o Jogador</option>';
+    }
+    function togglePoll() {
+      if (!isAdmin) return;
+      pollActive = !pollActive;
+      if (pollActive) {
+        playerCodes = {};
+        teams.forEach(team => {
+          team.players.forEach(player => {
+            playerCodes[generatePlayerCode(player.name)] = player.name;
+          });
+        });
+      }
+      updatePollView();
+      updateAdminPanelView();
+    }
+    function getWinningPlayer() {
+      const voteCounts = {};
+      Object.values(pollVotes).forEach(vote => {
+        const key = `${vote.team} - ${vote.player}`;
+        voteCounts[key] = (voteCounts[key] || 0) + 1;
+      });
+      if (Object.keys(voteCounts).length === 0) {
+        return {
+          topPlayers: ['Nenhum voto registrado'],
+          votes: [0]
+        };
+      }
+      const sortedPlayers = Object.entries(voteCounts).sort(([, a], [, b]) => b - a).slice(0, 5);
+      return {
+        topPlayers: sortedPlayers.map(([player]) => player),
+        votes: sortedPlayers.map(([, votes]) => votes)
+      };
+    }
+    function getTeamStats() {
+      const mostGoals = teams.reduce((prev, current) => {
+        return prev.goalsFor > current.goalsFor ? prev : current;
+      });
+      const mostConceded = teams.reduce((prev, current) => {
+        return prev.goalsAgainst > current.goalsAgainst ? prev : current;
+      });
+      return {
+        mostGoalsScoredTeam: mostGoals.name,
+        mostGoalsScoredCount: mostGoals.goalsFor,
+        mostGoalsConcededTeam: mostConceded.name,
+        mostGoalsConcededCount: mostConceded.goalsAgainst
+      };
+    }
+    function getPlayerStats() {
+      let playerStats = {};
+      teams.forEach(team => {
+        team.players.forEach(player => {
+          if (!playerStats[player.name]) {
+            playerStats[player.name] = {
+              goals: 0,
+              yellowCards: 0,
+              redCards: 0,
+              team: team.name
+            };
+          }
+        });
+      });
+      return playerStats;
+    }
+    function updateStatisticsView() {
+      const content = document.getElementById('statistics-content');
+      const teamStats = getTeamStats();
+      const playerStats = getPlayerStats();
+      const teams = getTeams();
+      content.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 4px; margin: 10px 0;">
+          <h3>Estatísticas dos Times</h3>
+          <p>Time que mais fez gols: ${teamStats.mostGoalsScoredTeam} (${teamStats.mostGoalsScoredCount} gols)</p>
+          <p>Time que mais tomou gols: ${teamStats.mostGoalsConcededTeam} (${teamStats.mostGoalsConcededCount} gols)</p>
+          
+          <h2 style="margin-top: 20px;">Estatísticas dos Jogadores</h2>
+          ${teams.map(team => `
+            <div style="margin: 15px 0;">
+              <h3>${team.name}</h3>
+              <table class="table">
+                <tr>
+                  <th>Nº</th>
+                  <th>Nome</th>
+                  <th>Gols</th>
+                  <th>CA</th>
+                  <th>CV</th>
+                </tr>
+                ${team.players.map(player => {
+        const stats = playerStats[`${team.name}-${player.number}`] || {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0
+        };
+        return `
+                    <tr>
+                      <td>${player.number}</td>
+                      <td>${player.name}</td>
+                      <td>${stats.goals || 0}</td>
+                      <td>${stats.yellowCards || 0}</td>
+                      <td>${stats.redCards || 0}</td>
+                    </tr>
+                  `;
+      }).join('')}
+              </table>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    function updateMatches() {
+      const matchesTable = document.getElementById('matches-table');
+      matchesTable.innerHTML = `
+        <h2>1º Turno</h2>
+        ${[1, 2, 3].map(round => `
+          <h3>Rodada ${round}</h3>
+          <table class="table">
+            <tr>
+              <th>Jogo</th>
+              <th>Data</th>
+              <th>Hora</th>
+              ${isAdmin ? '<th>Ações</th>' : ''}
+            </tr>
+            ${matches.filter(m => m.turn === 1 && m.round === round).map((match, idx) => `
+              <tr id="match-${matches.indexOf(match)}">
+                <td>${match.team1} vs ${match.team2}</td>
+                <td>${match.date ? match.date.toLocaleDateString() : 'TBD'}</td>
+                <td>${match.date ? match.date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) : 'TBD'}</td>
+                ${isAdmin ? `
+                  <td>
+                    <div class="match-edit-controls">
+                      <input type="password" placeholder="Senha" class="match-password">
+                      <button onclick="editMatch(${matches.indexOf(match)})" class="btn">Editar</button>
+                    </div>
+                  </td>
+                ` : ''}
+              </tr>
+            `).join('')}
+          </table>
+        `).join('')}
+    
+        <h2>2º Turno</h2>
+        ${[1, 2, 3].map(round => `
+          <h3>Rodada ${round}</h3>
+          <table class="table">
+            <tr>
+              <th>Jogo</th>
+              <th>Data</th>
+              <th>Hora</th>
+              ${isAdmin ? '<th>Ações</th>' : ''}
+            </tr>
+            ${matches.filter(m => m.turn === 2 && m.round === round).map((match, idx) => `
+              <tr id="match-${matches.indexOf(match)}">
+                <td>${match.team1} vs ${match.team2}</td>
+                <td>${match.date ? match.date.toLocaleDateString() : 'TBD'}</td>
+                <td>${match.date ? match.date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) : 'TBD'}</td>
+                ${isAdmin ? `
+                  <td>
+                    <div class="match-edit-controls">
+                      <input type="password" placeholder="Senha" class="match-password">
+                      <button onclick="editMatch(${matches.indexOf(match)})" class="btn">Editar</button>
+                    </div>
+                  </td>
+                ` : ''}
+              </tr>
+            `).join('')}
+          </table>
+        `).join('')}
+      `;
+    }
+    function updateAdminPanelView() {
+      const adminPanel = document.getElementById('admin-panel');
+      adminPanel.innerHTML = `
+        <h2>Painel Administrativo</h2>
+        
+        <style>
+          .admin-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+          }
+          
+          .admin-menu button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          .admin-menu button:hover {
+            background: #45a049;
+          }
+          
+          .admin-section {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 4px;
+            display: none;
+          }
+          
+          .admin-section.active {
+            display: block;
+          }
+        </style>
+    
+        <div class="admin-menu">
+          <button onclick="showAdminSection('waiting')">Lista de Espera</button>
+          <button onclick="showAdminSection('attendance')">Licenças</button>
+          <button onclick="showAdminSection('poll')">Enquete</button>
+          <button onclick="showAdminSection('teams')">Times</button>
+          <button onclick="showAdminSection('matches')">Confrontos</button>
+          <button onclick="showAdminSection('question')">Pergunta para Votação</button>
+          <button onclick="showAdminSection('stats')">Estatísticas Jogadores</button>
+          <button onclick="adminLogout()" class="btn logout">Sair</button>
+        </div>
+    
+        <div id="admin-waiting" class="admin-section">
+        </div>
+    
+        <div id="admin-attendance" class="admin-section">
+        </div>
+    
+        <div id="admin-poll" class="admin-section">
+          <h3>Enquete</h3>
+          <button onclick="togglePoll()" class="btn">
+            ${pollActive ? 'Encerrar Votação' : 'Iniciar Votação'}
+          </button>
+          
+          ${!pollActive && Object.keys(pollVotes).length > 0 ? `<div class="poll-results">
+              <h4>Resultado Final</h4>
+              <p>Jogador Destaque: ${getWinningPlayer()}</p>
+            </div>` : ''}
+        </div>
+    
+        <div id="admin-teams" class="admin-section">
+          <h3>Times</h3>
+          ${teams.map(team => `
+            <div style="margin: 10px 0;">
+              <h4>${team.name}</h4>
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <input type="text" id="player-input-${team.name}" placeholder="Nome do jogador" style="flex: 2;">
+                <input type="number" id="player-number-${team.name}" placeholder="Nº" min="1" max="99" style="flex: 1; width: 80px;">
+                <button onclick="addPlayer('${team.name}')" class="btn">Adicionar Jogador</button>
+              </div>
+    
+              <div style="margin: 10px 0;">
+                <h5>Adicionar Vários Jogadores</h5>
+                <p>Format: número,nome (um por linha)</p>
+                <textarea id="bulk-players-${team.name}" rows="10" style="width: 100%; margin-bottom: 10px;" 
+                  placeholder="1,João Silva
+    2,Pedro Santos
+    3,Carlos Oliveira"></textarea>
+                <button onclick="addBulkPlayers('${team.name}')" class="btn">Adicionar Lista</button>
+                <button onclick="removeAllPlayers('${team.name}')" class="btn reset">Remover Todos</button>
+              </div>
+    
+              <table class="table" style="width: 100%;">
+                <tr>
+                  <th style="width: 80px;">Nº</th>
+                  <th>Nome</th>
+                  <th style="width: 100px;">Ações</th>
+                </tr>
+                ${team.players.map(player => `
+                  <tr>
+                    <td>${player.number}</td>
+                    <td>${player.name}</td>
+                    <td>
+                      <button onclick="removePlayer('${team.name}', '${player.name}')" class="btn">Remover</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </table>
+            </div>
+          `).join('')}
+        </div>
+    
+        <div id="admin-matches" class="admin-section">
+          <h3>Gerenciar Confrontos</h3>
+          
+          <div class="admin-matches">
+            <h4>1º Turno</h4>
+            ${[1, 2, 3].map(round => `
+              <h5>Rodada ${round}</h5>
+              <table>
+                <tr>
+                  <th>Jogo</th>
+                  <th>Data</th>
+                  <th>Hora</th>
+                  <th>Placar</th>
+                  <th>Ações</th>
+                </tr>
+                ${matches.filter(m => m.turn === 1 && m.round === round).map((match, idx) => `
+                  <tr id="admin-match-${matches.indexOf(match)}">
+                    <td>${match.team1} vs ${match.team2}</td>
+                    <td>${match.date ? match.date.toLocaleDateString() : 'Não definida'}</td>
+                    <td>${match.date ? match.date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) : 'Não definido'}</td>
+                    <td>${match.score1 !== null ? `${match.score1} - ${match.score2}` : 'Não jogado'}</td>
+                    <td>
+                      <button onclick="editMatch(${matches.indexOf(match)})" class="btn">Editar</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </table>
+            `).join('')}
+    
+            <h4>2º Turno</h4>
+            ${[1, 2, 3].map(round => `
+              <h5>Rodada ${round}</h5>
+              <table>
+                <tr>
+                  <th>Jogo</th>
+                  <th>Data</th>
+                  <th>Hora</th>
+                  <th>Placar</th>
+                  <th>Ações</th>
+                </tr>
+                ${matches.filter(m => m.turn === 2 && m.round === round).map((match, idx) => `
+                  <tr id="admin-match-${matches.indexOf(match)}">
+                    <td>${match.team1} vs ${match.team2}</td>
+                    <td>${match.date ? match.date.toLocaleDateString() : 'Não definida'}</td>
+                    <td>${match.date ? match.date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      }) : 'Não definido'}</td>
+                    <td>${match.score1 !== null ? `${match.score1} - ${match.score2}` : 'Não jogado'}</td>
+                    <td>
+                      <button onclick="editMatch(${matches.indexOf(match)})" class="btn">Editar</button>
+                    </td>  
+                  </tr>
+                `).join('')}
+              </table>
+            `).join('')}
+          </div>
+        </div>
+    
+        <div id="admin-question" class="admin-section">
+          <h3>Pergunta para Votação</h3>
+          
+          <div class="admin-controls">
+            <input type="text" id="question-text" placeholder="Digite a pergunta">
+            <div id="options-container">
+              <input type="text" class="option-input" placeholder="Opção 1">
+              <input type="text" class="option-input" placeholder="Opção 2">
+            </div>
+            <button onclick="addOption()" class="btn">+ Adicionar Opção</button>
+            <button onclick="startQuestion()" class="btn">Iniciar Votação</button>
+          </div>
+    
+          <div class="question-results">
+            ${activeQuestion ? renderQuestionResults() : ''}
+          </div>
+        </div>
+    
+        <div id="admin-stats" class="admin-section">
+          <h3>Estatísticas dos Jogadores</h3>
+          
+          ${teams.map(team => `
+            <div style="margin: 20px 0; background: white; padding: 15px; border-radius: 4px;">
+              <h4>${team.name}</h4>
+              <table class="table" style="width: 100%;">
+                <tr>
+                  <th>Nº</th>
+                  <th>Nome</th>
+                  <th>Gols</th>
+                  <th>CA</th>
+                  <th>CV</th>
+                  <th>Ações</th>
+                </tr>
+                ${team.players.map(player => {
+        const stats = playerStats[`${team.name}-${player.number}`] || {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0
+        };
+        return `
+                    <tr>
+                      <td>${player.number}</td>
+                      <td>${player.name}</td>
+                      <td>${stats.goals}</td>
+                      <td>${stats.yellowCards}</td>
+                      <td>${stats.redCards}</td>
+                      <td>
+                        <button onclick="addGoal('${team.name}', '${player.number}')" class="btn">+ Gol</button>
+                        <button onclick="addYellowCard('${team.name}', '${player.number}')" class="btn">+ CA</button>
+                        <button onclick="addRedCard('${team.name}', '${player.number}')" class="btn">+ CV</button>
+                        <button onclick="resetStats('${team.name}', '${player.number}')" class="btn reset">Limpar</button>
+                      </td>
+                    </tr>
+                  `;
+      }).join('')}
+              </table>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('admin-attendance').innerHTML = `
+        <h3>Licenças</h3>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <input type="text" id="admin-attendance-name" placeholder="Nome do atleta">
+          <input type="date" id="admin-attendance-date">
+          <button onclick="addAttendanceLicense()" class="btn">Adicionar Licença</button>
+        </div>
+    
+        <div id="attendance-list">
+          ${Object.entries(attendanceList).map(([date, players]) => `
+            <div class="attendance-date">
+              <h4>${new Date(date).toLocaleDateString()}</h4>
+              ${players.map(player => `
+                <div class="attendance-item">
+                  <span>${player}</span>
+                  <button onclick="removeAttendance('${date}', '${player}')" class="btn">Remover</button>
+                </div>
+              `).join('')}
+            </div>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('admin-waiting').innerHTML = `
+        <h3>Lista de Espera</h3>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <input type="text" id="admin-waiting-name" placeholder="Nome do atleta" style="flex: 1;">
+          <button onclick="addWaitingAthlete()" class="btn">Adicionar Atleta</button>
+        </div>
+    
+        <div class="waiting-list-table">
+          ${waitingList.map((name, index) => `
+            <div class="waiting-list-item">
+              <span>${name}</span>
+              <div>
+                <button onclick="removeFromWaitingList(\`${index}\`)" class="btn">Remover</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      const styles = `
+        <style>
+          .admin-matches table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+          }
+          .admin-matches th,
+          .admin-matches td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+          }
+          .admin-matches th {
+            background: #4CAF50;
+            color: white;
+          }
+          .admin-matches input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+          }
+          .admin-matches .btn {
+            margin: 0 5px;
+          }
+        </style>
+      `;
+      showAdminSection('waiting');
+    }
+    function showAdminSection(sectionId) {
+      document.querySelectorAll('.admin-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(`admin-${sectionId}`).classList.add('active');
+      document.getElementById('admin-panel').classList.add('active');
+    }
+    function updateTeamsView() {
+      const content = document.getElementById('teams-content');
+      content.innerHTML = `
+        ${teams.map(team => `
+          <div style="background: white; padding: 20px; border-radius: 4px; margin: 10px 0;">
+            <h3 style="color: #1b5e20; margin-bottom: 15px;">${team.name}</h3>
+            <table class="table">
+              <tr>
+                <th>Número</th>
+                <th>Nome</th>
+              </tr>
+              ${team.players.map(player => `
+                <tr>
+                  <td>${player.number}</td>
+                  <td>${player.name}</td>
+                </tr>
+              `).join('')}
+            </table>
+          </div>
+        `).join('')}
+      `;
+    }
+    function addPlayer(teamName) {
+      const input = document.getElementById(`player-input-${teamName}`);
+      const numberInput = document.getElementById(`player-number-${teamName}`);
+      const playerName = input.value.trim();
+      const jerseyNumber = numberInput.value.trim();
+      if (playerName && jerseyNumber) {
+        const team = teams.find(t => t.name === teamName);
+        const numberExists = team.players.some(p => p.number === jerseyNumber);
+        if (numberExists) {
+          alert('Este número de camisa já está em uso neste time!');
+          return;
+        }
+        if (team && team.players.length < 20) {
+          const votingCode = generateVotingCode(teamName, jerseyNumber);
+          team.players.push({
+            name: playerName,
+            number: jerseyNumber,
+            votingCode: votingCode
+          });
+          input.value = '';
+          numberInput.value = '';
+          updateAdminPanelView();
+          updatePollView();
+          updateTeamsView();
+        } else {
+          alert('Limite máximo de 20 jogadores atingido!');
+        }
+      } else {
+        alert('Por favor, preencha o nome e número do jogador!');
+      }
+    }
+    function removePlayer(teamName, playerName) {
+      const team = teams.find(t => t.name === teamName);
+      if (team) {
+        team.players = team.players.filter(p => p.name !== playerName);
+        updateAdminPanelView();
+        updateTeamsView();
+      }
+    }
+    function addOption() {
+      const container = document.getElementById('options-container');
+      const newOption = document.createElement('input');
+      newOption.type = 'text';
+      newOption.className = 'option-input';
+      newOption.placeholder = `Opção ${container.children.length + 1}`;
+      container.appendChild(newOption);
+    }
+    function startQuestion() {
+      const questionText = document.getElementById('question-text').value;
+      const options = Array.from(document.getElementsByClassName('option-input')).map(input => input.value).filter(val => val.trim());
+      if (!questionText || options.length < 2) {
+        alert('Digite uma pergunta e pelo menos 2 opções');
+        return;
+      }
+      activeQuestion = {
+        text: questionText,
+        options: options
+      };
+      questionVotes = {};
+      votedPlayers = new Set();
+      updatePollView();
+    }
+    function renderQuestionResults() {
+      const results = activeQuestion.options.map(option => {
+        const votes = questionVotes[option] || 0;
+        const percent = Object.keys(questionVotes).length ? Math.round(votes / Object.keys(questionVotes).length * 100) : 0;
+        return `
+          <div class="question-option">
+            <span>${option}: ${votes} votos (${percent}%)</span>
+          </div>
+        `;
+      }).join('');
+      return `
+        <h4>Resultados: ${activeQuestion.text}</h4>
+        <div class="question-options">
+          ${results}
+        </div>
+        <button onclick="endQuestion()" class="btn">Encerrar Votação</button>
+      `;
+    }
+    function submitQuestionVote() {
+      const code = document.getElementById('player-vote-code').value.trim().toUpperCase();
+      const selectedOption = document.querySelector('input[name="vote"]:checked')?.value;
+      if (!code || !selectedOption) {
+        alert('Digite seu código e selecione uma opção');
+        return;
+      }
+      const matchingPlayer = teams.some(team => team.players.some(player => player.votingCode === code));
+      if (!matchingPlayer) {
+        alert('Código inválido');
+        return;
+      }
+      if (votedPlayers.has(code)) {
+        alert('Você já votou');
+        return;
+      }
+      questionVotes[selectedOption] = (questionVotes[selectedOption] || 0) + 1;
+      votedPlayers.add(code);
+      alert('Voto registrado com sucesso!');
+      updatePollView();
+      updateAdminPanelView();
+    }
+    function endQuestion() {
+      activeQuestion = null;
+      updatePollView();
+      updateAdminPanelView();
+    }
+    function generateVotingCode(team, jerseyNumber) {
+      return `${team}-${jerseyNumber}`.toUpperCase();
+    }
+    function resetPoll() {
+      if (confirm('Tem certeza que deseja limpar todos os votos da enquete?')) {
+        pollVotes = {};
+        votedCodes = new Set();
+        updatePollView();
+        updateAdminPanelView();
+        alert('Votação reiniciada com sucesso!');
+      }
+    }
+    function addBulkPlayers(teamName) {
+      const team = teams.find(t => t.name === teamName);
+      if (!team) return;
+      const bulkInput = document.getElementById(`bulk-players-${teamName}`).value;
+      const playerLines = bulkInput.trim().split('\n');
+      if (playerLines.length > 20) {
+        alert('Máximo de 20 jogadores permitido!');
+        return;
+      }
+      team.players = [];
+      playerLines.forEach(line => {
+        const [number, name] = line.split(',').map(s => s.trim());
+        if (number && name) {
+          const votingCode = generateVotingCode(teamName, number);
+          team.players.push({
+            name: name,
+            number: number,
+            votingCode: votingCode
+          });
+        }
+      });
+      document.getElementById(`bulk-players-${teamName}`).value = '';
+      updateAdminPanelView();
+      updatePollView();
+      updateTeamsView();
+    }
+    function removeAllPlayers(teamName) {
+      if (confirm(`Tem certeza que deseja remover todos os jogadores do time ${teamName}?`)) {
+        const team = teams.find(t => t.name === teamName);
+        if (team) {
+          team.players = [];
+          updateAdminPanelView();
+          updatePollView();
+          updateTeamsView();
+        }
+      }
+    }
+    function addGoal(teamName, playerNumber) {
+      const key = `${teamName}-${playerNumber}`;
+      if (!playerStats[key]) {
+        playerStats[key] = {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0
+        };
+      }
+      playerStats[key].goals++;
+      updateAdminPanelView();
+    }
+    function addYellowCard(teamName, playerNumber) {
+      const key = `${teamName}-${playerNumber}`;
+      if (!playerStats[key]) {
+        playerStats[key] = {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0
+        };
+      }
+      playerStats[key].yellowCards++;
+      updateAdminPanelView();
+    }
+    function addRedCard(teamName, playerNumber) {
+      const key = `${teamName}-${playerNumber}`;
+      if (!playerStats[key]) {
+        playerStats[key] = {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0
+        };
+      }
+      playerStats[key].redCards++;
+      updateAdminPanelView();
+    }
+    function resetStats(teamName, playerNumber) {
+      const key = `${teamName}-${playerNumber}`;
+      playerStats[key] = {
+        goals: 0,
+        yellowCards: 0,
+        redCards: 0
+      };
+      updateAdminPanelView();
+    }
+    function downloadAthleteNotes() {
+      const {
+        jsPDF
+      } = window.jspdf;
+      const doc = new jsPDF();
+      const content = document.getElementById('athlete-notes-content').value;
+      const title = "VETERANOS GRÊMIO MINEIRO - ANOTAÇÕES DOS ATLETAS";
+      const date = new Date().toLocaleDateString();
+      doc.setFontSize(16);
+      doc.text(title, 15, 20);
+      doc.setFontSize(12);
+      doc.text(`Data: ${date}`, 15, 30);
+      const splitText = doc.splitTextToSize(content, 180);
+      doc.text(splitText, 15, 40);
+      doc.save('anotacoes-atletas.pdf');
+    }
+    function downloadStatute() {
+      const {
+        jsPDF
+      } = window.jspdf;
+      const doc = new jsPDF();
+      const content = document.getElementById('statute-content').value;
+      const title = "VETERANOS GRÊMIO MINEIRO - ESTATUTO";
+      const date = new Date().toLocaleDateString();
+      doc.setFontSize(16);
+      doc.text(title, 15, 20);
+      doc.setFontSize(12);
+      doc.text(`Data: ${date}`, 15, 30);
+      const splitText = doc.splitTextToSize(content, 180);
+      doc.text(splitText, 15, 40);
+      doc.save('estatuto.pdf');
+    }
+    function addWaitingAthlete() {
+      const nameInput = document.getElementById('admin-waiting-name');
+      const athleteName = nameInput.value.trim();
+      if (!athleteName) {
+        alert('Por favor insira o nome do atleta');
+        return;
+      }
+      if (waitingList.includes(athleteName)) {
+        alert('Este atleta já está na lista de espera');
+        return;
+      }
+      waitingList.push(athleteName);
+      nameInput.value = '';
+      updateAdminPanelView();
+      updateWaitingListView();
+    }
+    function addAttendanceLicense() {
+      const name = document.getElementById('admin-attendance-name').value.trim();
+      const date = document.getElementById('admin-attendance-date').value;
+      if (!name || !date) {
+        alert('Por favor preencha o nome do atleta e a data');
+        return;
+      }
+      if (!attendanceList[date]) {
+        attendanceList[date] = [];
+      }
+      if (attendanceList[date].includes(name)) {
+        alert('Este atleta já possui licença nesta data');
+        return;
+      }
+      attendanceList[date].push(name);
+      document.getElementById('admin-attendance-name').value = '';
+      document.getElementById('admin-attendance-date').value = '';
+      updateAdminPanelView();
+      updateAttendanceView();
+    }
+    window.onload = function () {
+      showTab('classification');
+      updateClassification();
+      updateMatches();
+      updateWaitingListView();
+      updateAttendanceView();
+      updatePollView();
+      updateStatisticsView();
+      updateTeamsView();
+      const statuteTextarea = document.getElementById('statute-content');
+      if (statuteTextarea) {
+        statuteTextarea.addEventListener('input', function () {
+          localStorage.setItem('statute', this.value);
+        });
+        statuteTextarea.value = localStorage.getItem('statute') || '';
+      }
+    };</script>
+    </head>
+    <body>
+    <div class="tab-buttons">
+        <button onclick="showTab('classification')">Classifica&#xe7;&#xe3;o</button>
+        <button onclick="showTab('matches')">Confrontos</button>
+        <button onclick="showTab('waiting-list')">Lista de Espera</button>
+        <button onclick="showTab('licenses')">Licen&#xe7;as</button>
+        <button onclick="showTab('statistics')">Estat&#xed;sticas</button>
+        <button onclick="showTab('poll')">Enquete</button>
+        <button onclick="showTab('admin-login')">Administrador</button>
+        <button onclick="showTab('teams')">Times</button>
+        <button onclick="showTab('statute')">Estatuto</button>
+    </div>
+    
+    <div id="classification" class="tab active">
+        <h2>Classifica&#xe7;&#xe3;o</h2>
+        <table id="classification-table" class="table"></table>
+        <div style="background: white; padding: 20px; border-radius: 4px; margin-top: 20px;">
+            <h3 style="color: #1b5e20; margin-bottom: 15px;">Legenda:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+              <div>
+                <strong>PTS</strong> - Pontos
+              </div>
+              <div>
+                <strong>J</strong> - Jogos
+              </div>
+              <div>
+                <strong>V</strong> - Vit&#xf3;rias
+              </div>
+              <div>
+                <strong>E</strong> - Empates
+              </div>
+              <div>
+                <strong>D</strong> - Derrotas
+              </div>
+              <div>
+                <strong>CV</strong> - Cart&#xf5;es Vermelhos
+              </div>
+              <div>
+                <strong>CA</strong> - Cart&#xf5;es Amarelos
+              </div>
+              <div>
+                <strong>GP</strong> - Gols Pr&#xf3;
+              </div>
+              <div>
+                <strong>GC</strong> - Gols Contra
+              </div>
+              <div>
+                <strong>SG</strong> - Saldo de Gols
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="matches" class="tab">
+        <h2>Confrontos</h2>
+        <div id="matches-table" class="matches-table"></div>
+    </div>
+    
+    <div id="waiting-list" class="tab">
+        <h2>Lista de Espera</h2>
+        <div id="waiting-list-content"></div>
+    </div>
+    
+    <div id="licenses" class="tab">
+        <h2>Licen&#xe7;as</h2>
+        <div id="licenses-content"></div>
+    </div>
+    
+    <div id="statistics" class="tab">
+        <h2>Estat&#xed;sticas</h2>
+        <div id="statistics-content"></div>
+    </div>
+    
+    <div id="poll" class="tab">
+        <h2>Enquete</h2>
+        <div id="poll-content"></div>
+    </div>
+    
+    <div id="teams" class="tab">
+        <h2>Times</h2>
+        <div id="teams-content"></div>
+    </div>
+    
+    <div id="admin-login" class="tab">
+        <div class="admin-login">
+            <h2>Login Administrador</h2>
+            <div class="admin-form">
+                <input type="password" id="adminPassword" placeholder="Senha">
+                <button onclick="adminLogin()" class="btn">Entrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="admin-panel" class="tab">
+        <h2>Painel Administrativo</h2>
+        <div class="admin-menu">
+            <button onclick="showAdminSection('waiting')">Lista de Espera</button>
+            <button onclick="showAdminSection('attendance')">Licen&#xe7;as</button>
+            <button onclick="showAdminSection('poll')">Enquete</button>
+            <button onclick="showAdminSection('teams')">Times</button>
+            <button onclick="showAdminSection('matches')">Confrontos</button>
+            <button onclick="showAdminSection('question')">Pergunta para Vota&#xe7;&#xe3;o</button>
+            <button onclick="showAdminSection('stats')">Estat&#xed;sticas Jogadores</button>
+            <button onclick="adminLogout()" class="btn logout">Sair</button>
+        </div>
+    
+        <div id="admin-waiting" class="admin-section">
+          <h3>Lista de Espera</h3>
+          
+          <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="admin-waiting-name" placeholder="Nome do atleta" style="flex: 1;">
+            <button onclick="addWaitingAthlete()" class="btn">Adicionar Atleta</button>
+          </div>
+    
+          <div class="waiting-list-table">
+            ${waitingList.map((name, index) => `
+              <div class="waiting-list-item">
+                <span>${name}</span>
+                <div>
+                  <button onclick="removeFromWaitingList(${index})" class="btn">Remover</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div id="admin-attendance" class="admin-section">...</div>
+        <div id="admin-poll" class="admin-section">
+          <h3>Enquete</h3>
+          <button onclick="togglePoll()" class="btn">
+            Encerrar Vota&#xe7;&#xe3;o
+          </button>
+          
+          <div class="poll-voting">
+            <h4>Registrar Voto</h4>
+            <input type="text" id="player-code" placeholder="C&#xf3;digo de vota&#xe7;&#xe3;o">
+            <select id="vote-team" onchange="updatePlayerSelection()" class="form-select">
+              <option value="">Selecione o Time</option>
+              <option value="It&#xe1;lia">It&#xe1;lia</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Holanda">Holanda</option>
+              <option value="Espanha">Espanha</option>
+            </select>
+            <select id="vote-player" class="form-select">
+              <option value="">Selecione o Jogador</option>
+            </select>
+            <button onclick="submitVote()" class="btn">Votar</button>
+          </div>
+    
+          <div class="poll-results">
+            <h4>Resultado Final</h4>
+            <p>Jogador Destaque: Nenhum voto registrado</p>
+          </div>
+    
+          <div class="player-codes" style="margin-top: 20px;">
+            <h4>C&#xf3;digos de Vota&#xe7;&#xe3;o</h4>
+            <ul>
+            </ul>
+          </div>
+        </div>
+        <div id="admin-teams" class="admin-section">...</div>
+        <div id="admin-matches" class="admin-section">...</div>
+        <div id="admin-question" class="admin-section">...</div>
+        <div id="admin-stats" class="admin-section">...</div>
+    </div>
+    
+    <div id="statute" class="tab">
+      <h2>Estatuto</h2>
+      <div style="max-width: 800px; margin: 20px auto;">
+        <div style="background: white; padding: 20px; border-radius: 4px;">
+          <textarea id="statute-content" rows="10" style="width: 100%; padding: 10px; margin-bottom: 10px;" placeholder="Digite o estatuto aqui..."></textarea>
+          <button onclick="downloadStatute()" class="btn">Baixar em PDF</button>
+        </div>
+      </div>
+    </div>
+    </body></html>
+/c:/Users/Prime Elétrica/Documents/sites/football-championship/
+├── public/
+│   └── index.html
+├── server.js
